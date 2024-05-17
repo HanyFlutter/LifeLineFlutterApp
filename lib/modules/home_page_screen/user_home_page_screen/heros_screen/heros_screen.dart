@@ -4,14 +4,14 @@ import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/constants.dart';
 import 'package:lifeline/styles/main_style.dart';
 
-class HerosScreen extends StatefulWidget {
-  const HerosScreen({super.key});
+class HeroesScreen extends StatefulWidget {
+  const HeroesScreen({super.key});
 
   @override
-  State<HerosScreen> createState() => _HerosScreenState();
+  State<HeroesScreen> createState() => _HeroesScreenState();
 }
 
-class _HerosScreenState extends State<HerosScreen> {
+class _HeroesScreenState extends State<HeroesScreen> {
 
   @override
   void initState() {

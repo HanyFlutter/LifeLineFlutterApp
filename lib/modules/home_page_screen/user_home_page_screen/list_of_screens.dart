@@ -7,7 +7,7 @@ import 'package:lifeline/modules/home_page_screen/user_home_page_screen/search_s
 
  List <Widget> screenList=[
    SearchScreen(),
-   HerosScreen(),
+   HeroesScreen(),
    CallsScreen(),
    ProfileScreen(),
 

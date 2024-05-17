@@ -118,7 +118,18 @@ Map proccessOfRegistrationReasponse(Map object) {
 
 Map processHospitalRegistrationRespond(Map<String, dynamic> object) {
   goverCode = object["gov"];
+  cityCode=object["city"];
+  object["gov"] = hospitalsMap[object["gov"].toString()]?[0][0];
 
+  hospitalsMap[goverCode.toString()]!.forEach((element) {
+    element[3] == cityCode ? object["city"] = element[2] : '';
+  });
+
+  print("from the function $object");
+  return object;
+}
+Map processBloodBankRegistrationRespond(Map<String, dynamic> object) {
+  goverCode = object["gov"];
   object["gov"] = hospitalsMap[object["gov"].toString()]?[0][0];
 
   hospitalsMap[goverCode.toString()]!.forEach((element) {
@@ -157,3 +168,7 @@ Map updateResponse = {};
 Map objectFromHospitalRegistration = {};
 String firstTimeDonation =
     '''إذا كنت تتبرع بالدم لأول مرة، فقد ينتابك شعور بالتوتر والقلق، وهذا أمر شائع. تأكد من أن الإغماء قبل أو أثناء أو بعد التبرع بالدم أمر نادر الحدوث. موظفونا موهوبون في جعل التجربة سلسة قدر الإمكان. ربما من الأفضل ألا تشاهد الإبرة عند إدخالها، واحرص كذلك على عدم رؤية الدم.''';
+bool isFirstTimeOpenApp=true;
+String isOwner='';
+List receivedHistory=[];
+List heros=[];

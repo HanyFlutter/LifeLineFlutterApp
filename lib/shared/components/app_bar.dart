@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:lifeline/styles/main_style.dart';
 
 PreferredSizeWidget appBarWidget({required String title}){
 
   return AppBar(
 
-    backgroundColor:Color.fromARGB(255, 179, 17, 17),
+    backgroundColor:mainColor,
 
     title: Center(child: Row(
       mainAxisAlignment: MainAxisAlignment.center,

@@ -10,6 +10,7 @@ import 'package:lifeline/network/local/local_database.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
+import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/const_text_controllers.dart';
 import 'package:lifeline/shared/constants.dart';
 
@@ -25,6 +26,8 @@ void main() async {
   userType = await SharedPreferencesHelper.getString(key: 'loginAs') ?? '';
   userID=await SharedPreferencesHelper.getString(key: 'userID') ?? '';
     userToken=await SharedPreferencesHelper.getString(key: 'userToken') ?? '';
+  isFirstTimeOpenApp=await SharedPreferencesHelper.getBool(key: 'isFirstTimeOpenApp')??true;
+  selectedItemJoinAsLogin=await SharedPreferencesHelper.getString(key: 'loginAs')??'شخصي';
   DioHelper.dio.options.connectTimeout = Duration(milliseconds: 100000);
 print("user id from main $userID usertoken $userToken userType $userType remember me $rememberMe");
 
@@ -85,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        body: IntroScreen(),
+        body: isFirstTimeOpenApp?IntroScreen():LoginScreen(),
       ),
     );
   }

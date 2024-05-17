@@ -29,13 +29,16 @@ Widget loginButton(
             "email": emailAddressLogin.value.text,
             "password": passwordLogin.value.text,
           };
-          print(loginJsonToApi);
+          print('login json to api $loginJsonToApi');
           Response response;
 
           if (selectedItemJoinAsLogin == 'شخصي') {
+
             try {
               response = await DioHelper.postData(
                   url: 'user/signIn', data: loginJsonToApi);
+              print('good to here');
+
               userAndTokenFromApiLoginPost = response.data;
               print("from login screen  $userAndTokenFromApiLoginPost");
               if (rememberMe == true) {
@@ -112,11 +115,11 @@ Widget loginButton(
   });
   objectFromApiLoginPost = response.data;
   print("from login screen  $objectFromApiLoginPost");
-  loginReaspons = processHospitalRegistrationRespond(
+  loginReaspons = processBloodBankRegistrationRespond(
   objectFromApiLoginPost!["bloodBank"]);
   print("from login $loginReaspons");
   Navigator.of(context).pushReplacement(MaterialPageRoute(
-  builder: (context) => BloodBankHomeScreen(goverCode: goverCode,cityCode: cityCode,objectFromRegistration: loginReaspons,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost,),
+  builder: (context) => BloodBankHomeScreen(goverCode: goverCode,objectFromRegistration: loginReaspons,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost,),
   ));
   }  catch (er) {
   print(er.toString());

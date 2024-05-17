@@ -17,19 +17,24 @@ class DioHelper {
   }
 
   static Future<Response> postData(
-      {required String url, Object? data, Map<String, dynamic>? header}) async {
+      {required String url, Object? data, Map<String, dynamic>? header,Map<String,dynamic>? param}) async {
     return await dio.post(url,
-        data: jsonEncode(data), options: Options(headers: header));
+        data: jsonEncode(data), options: Options(headers: header),queryParameters: param);
   }
 
   static Future<Response> getData(
-      {required String url, Object? data, Map<String, dynamic>? header}) async {
+      {required String url, Object? data, Map<String, dynamic>? header,Map<String,dynamic>? param}) async {
     return await dio.get(url,
-        data: jsonEncode(data), options: Options(headers: header));
+        data: jsonEncode(data), options: Options(headers: header),queryParameters: param);
+  }
+  static Future<Response> getDataWithoutBody(
+      {required String url, Map<String, dynamic>? header,Map<String,dynamic>? param}) async {
+    return await dio.get(url,
+         options: Options(headers: header),queryParameters: param);
   }
   static Future<Response> updateData(
-      {required String url, Object? data, Map<String, dynamic>? header,}) async {
+      {required String url, Object? data, Map<String, dynamic>? header,Map<String,dynamic>? param}) async {
     return await dio.patch(url,
-        data: jsonEncode(data), options: Options(headers: header));
+        data: jsonEncode(data), options: Options(headers: header),queryParameters: param);
   }
 }

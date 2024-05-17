@@ -53,7 +53,7 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                       itemBuilder: (context, index) {
                         return Card(
                             child: Padding(
-                                padding: EdgeInsets.all(5),
+                                padding: EdgeInsets.all(2),
                                 child: Directionality(
                                     textDirection: TextDirection.rtl,
                                     child: ListTile(
@@ -62,7 +62,7 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                             objectFromHospitalRegistration[
                                                     "bloodGroup"][index]
                                                 ["bloodType"],
-                                            style: TextStyle(fontSize: 16),
+                                            style: TextStyle(fontSize: 14),
                                           ),
                                         ),
                                         title: Row(
@@ -71,7 +71,7 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                           children: [
                                             Text(
                                               'عدد أكياس الدم',
-                                              style: TextStyle(fontSize: 14),
+                                              style: TextStyle(fontSize: 12),
                                             ),
                                             IconButton(
                                                 onPressed: () {
@@ -87,7 +87,7 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.add),)),
                                             SizedBox(
-                                              width: 3,
+                                              width: 2,
                                             ),
                                             Text(
                                               objectFromHospitalRegistration[
@@ -95,11 +95,11 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                                       ["count"]
                                                   .toString(),
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 16,
                                                   color: Colors.blueAccent),
                                             ),
                                             SizedBox(
-                                              width: 3,
+                                              width: 2,
                                             ),
                                             IconButton(
                                                 onPressed: () {
@@ -122,7 +122,7 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.remove),)),
                                             SizedBox(
-                                              width: 3,
+                                              width: 2,
                                             ),
                                           ],
                                         )))));

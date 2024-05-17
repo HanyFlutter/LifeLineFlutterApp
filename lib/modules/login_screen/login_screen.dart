@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lifeline/layout/home_screen/blood_bank_home_screen/blood_bank_home_screen.dart';
+import 'package:lifeline/layout/home_screen/hospital_home_screen/hospital_home_screen.dart';
 import 'package:lifeline/layout/home_screen/user_home_screen/user_home_screen.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
@@ -10,6 +12,7 @@ import 'package:lifeline/shared/components/password_text.dart';
 import 'package:lifeline/shared/components/select_account_type.dart';
 import 'package:lifeline/shared/components/tail_of_login_screen.dart';
 import 'package:lifeline/shared/components/toast_msg.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/const_text_controllers.dart';
 import 'package:lifeline/shared/const_validation.dart';
@@ -29,76 +32,170 @@ bool checkBoxValue=false;
       showPasswordLogin = !showPasswordLogin;
     });
   }
-  double opacityValue =0;
-  Future timer () async{
-    await SharedPreferencesHelper.init();
 
-    Future.delayed(Duration(milliseconds: 100),(){
-      setState(() {
-        opacityValue=1;
-      });
-    });
-  }
+
   @override
   void initState() {
-    timer();
-
-    print('prom login init state');
-try{
-  print(" before id $userID remember $rememberMe token $userToken");
-
-  SharedPreferencesHelper.getString(key: 'userID').then((value) => userID=value).catchError((e)=>print(e.toString()));
-  SharedPreferencesHelper.getString(key: 'userToken').then((value) => userToken=value).catchError((e)=>print(e.toString()));
-  SharedPreferencesHelper.getBool(key: 'rememberMe').then((value) { rememberMe=value;
-
-  print("after id $userID remember $rememberMe token $userToken");
-
-  if(rememberMe==true && userID !='' && userToken !=''){
-
-    print("good to here");
-
-    try {
-      DioHelper.getData(url: 'user/profile', header: {
-        "authentication": userToken
-      }, data: {
-        "userID": userID
-      }).then((value)async {
-        await SharedPreferencesHelper.setString(
-            key: 'userID',
-            value: userID);
-        await SharedPreferencesHelper.setString(
-            key: 'userToken',
-            value: userToken);
-        await SharedPreferencesHelper.setBool(key: 'rememberMe',value: rememberMe);
-        objectFromApiLoginPost = value.data;
-        print("from auto login screen  $objectFromApiLoginPost");
-        loginReaspons = proccessOfRegistrationReasponse(
-            objectFromApiLoginPost!["user"]);
-        constTitle = loginReaspons!["firstName"];
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => UserHomeScreen(loginReaspons,title:constTitle,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost!),
-        ));
-      });
-
-
-    } catch (er) {
-      print(er.toString());
-      showToast(context);
-    }
-  }
-  }).catchError((e)=>print(e.toString()));
-
-}catch(e){
-  print(e.toString());
-  showToast(context);
-}
-    // TODO: implement initState
     super.initState();
 
+    print('prom login init state');
+    SharedPreferencesHelper.getString(key: 'loginAs').then((value) {
+    userType = value;
+    if (userType == 'شخصي'){ try {
+      print(" before id $userID remember $rememberMe token $userToken");
+
+      SharedPreferencesHelper.getString(key: 'userID').then((value) =>
+      userID = value).catchError((e) => print(e.toString()));
+      SharedPreferencesHelper.getString(key: 'userToken').then((value) =>
+      userToken = value).catchError((e) => print(e.toString()));
+
+      SharedPreferencesHelper.getBool(key: 'rememberMe').then((value) {
+        rememberMe = value;
+
+        print("after id $userID remember $rememberMe token $userToken");
+
+        if (rememberMe == true && userID != '' && userToken != '') {
+          print("good to here");
+
+          try {
+            DioHelper.getData(url: 'user/profile', header: {
+              "authentication": userToken
+            }, data: {
+              "userID": userID
+            }).then((value) async {
+              await SharedPreferencesHelper.setString(
+                  key: 'userID',
+                  value: userID);
+              await SharedPreferencesHelper.setString(
+                  key: 'userToken',
+                  value: userToken);
+              await SharedPreferencesHelper.setBool(
+                  key: 'rememberMe', value: rememberMe);
+              objectFromApiLoginPost = value.data;
+              print("from auto login screen  $objectFromApiLoginPost");
+              loginReaspons = proccessOfRegistrationReasponse(
+                  objectFromApiLoginPost!["user"]);
+              constTitle = loginReaspons!["firstName"];
+              userAndTokenFromApiLoginPost!['token'] = userToken;
+              userAndTokenFromApiLoginPost!['userID'] = userID;
+
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) =>
+                    UserHomeScreen(loginReaspons, title: constTitle,
+                        userAndTokenFromApiLoginPos: userAndTokenFromApiLoginPost!),
+              ));
+            });
+          } catch (er) {
+            print(er.toString());
+            showToast(context);
+          }
+        }
+      }).catchError((e) => print(e.toString()));
+    } catch (e) {
+      print(e.toString());
+      showToast(context);
+    }
+    }else if (userType == 'بنك دم'){
+      print(" before id $userID remember $rememberMe token $userToken");
+
+      SharedPreferencesHelper.getString(key: 'userID').then((value) =>
+      userID = value).catchError((e) => print(e.toString()));
+      SharedPreferencesHelper.getString(key: 'userToken').then((value) =>
+      userToken = value).catchError((e) => print(e.toString()));
+      SharedPreferencesHelper.getString(key: 'isOwner').then((value) =>
+      isOwner = value).catchError((e) => print(e.toString()));
+
+      SharedPreferencesHelper.getBool(key: 'rememberMe').then((value) async {
+        rememberMe = value;
+
+        print("after id $userID remember $rememberMe token $userToken");
+
+        if (rememberMe == true && userID != '' && userToken != '') {
+          try {
+            Response response;
+            response = await DioHelper.getData(url: 'bloodBank/profile', header: {
+              "authentication": userToken
+            }, data: {
+
+              "bloodBankID": userID,
+              "isOwner":isOwner
+            });
+            print("good to here");
+
+            objectFromApiLoginPost = response.data;
+            print("from login screen  $objectFromApiLoginPost");
+            loginReaspons = processBloodBankRegistrationRespond(
+                objectFromApiLoginPost!["bloodBank"]);
+            print("from login $loginReaspons");
+            userAndTokenFromApiLoginPost!['token'] = userToken;
+            userAndTokenFromApiLoginPost!['bloodBankID'] = userID;
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => BloodBankHomeScreen(goverCode: goverCode,objectFromRegistration: loginReaspons,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost,),
+            ));
+          }  catch (er) {
+            print(er.toString());
+            showToast(context);
+
+          }
+        }
+        // TODO: implement initState
 
 
 
-  }
+
+      });}
+
+    else if (userType == 'مستشفى'){
+      print(" before id $userID remember $rememberMe token $userToken");
+
+      SharedPreferencesHelper.getString(key: 'userID').then((value) =>
+      userID = value).catchError((e) => print(e.toString()));
+      SharedPreferencesHelper.getString(key: 'userToken').then((value) =>
+      userToken = value).catchError((e) => print(e.toString()));
+      SharedPreferencesHelper.getString(key: 'isOwner').then((value) =>
+      isOwner = value).catchError((e) => print(e.toString()));
+
+      SharedPreferencesHelper.getBool(key: 'rememberMe').then((value) async {
+        rememberMe = value;
+
+        print("after id $userID remember $rememberMe token $userToken");
+
+        if (rememberMe == true && userID != '' && userToken != '') {
+          try {
+            Response response;
+            response = await DioHelper.getData(url: 'hospital/profile', header: {
+              "authentication": userToken
+            }, data: {
+
+              "hospitalID": userID,
+              "isOwner":isOwner
+            });
+            print("good to here");
+
+            objectFromApiLoginPost = response.data;
+            print("from login screen  $objectFromApiLoginPost");
+            loginReaspons = processHospitalRegistrationRespond(
+                objectFromApiLoginPost!["hospital"]);
+            print("from login token and id $userAndTokenFromApiLoginPost");
+            userAndTokenFromApiLoginPost!['token'] = userToken;
+            userAndTokenFromApiLoginPost!['hospitalID'] = userID;
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => HospitalHomeScreen(goverCode: goverCode,cityCode: cityCode,objectFromRegistration: loginReaspons,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost,),
+            ));
+          }  catch (er) {
+            print(er.toString());
+            showToast(context);
+
+          }
+        }
+        // TODO: implement initState
+
+
+
+
+      });}
+    }).catchError((e) { print(e.toString());});
+    }
   Widget SelectAccountType2 (){
     return Row (children: [
       Text(' الدخول كحساب ',style: TextStyle(fontSize: 14),),
@@ -196,7 +293,7 @@ try{
                 ],
               ),
             ),
-          ),
+            ),
         ),
       ),
     ));

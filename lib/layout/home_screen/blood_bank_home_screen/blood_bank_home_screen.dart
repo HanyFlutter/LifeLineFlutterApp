@@ -8,13 +8,12 @@ import 'package:lifeline/shared/constants.dart';
 class BloodBankHomeScreen extends StatefulWidget {
   final goverCode;
 
-  final cityCode;
 
   final objectFromRegistration;
 
   final userAndTokenFromApiLoginPos;
 
-  const BloodBankHomeScreen({super.key,required this.goverCode,required this.cityCode,required this.objectFromRegistration,required this.userAndTokenFromApiLoginPos});
+  const BloodBankHomeScreen({super.key,required this.goverCode,required this.objectFromRegistration,required this.userAndTokenFromApiLoginPos});
 
   @override
   State<BloodBankHomeScreen> createState() => _BloodBankHomeScreenState();
@@ -27,7 +26,7 @@ class _BloodBankHomeScreenState extends State<BloodBankHomeScreen> {
     super.initState();
     objectFromHospitalRegistration=widget.objectFromRegistration;
     goverCode=widget.goverCode;
-    cityCode=widget.cityCode;
+
     userAndTokenFromApiLoginPost=widget.userAndTokenFromApiLoginPos;
   }
   int indexItem=3;

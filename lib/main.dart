@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lifeline/layout/home_screen/user_home_screen/user_home_screen.dart';
 import 'package:lifeline/shared/components/intro_screen.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/modules/login_screen/login_screen.dart';
 import 'package:lifeline/network/local/local_database.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';

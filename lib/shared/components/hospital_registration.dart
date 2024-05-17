@@ -4,7 +4,7 @@ import 'package:lifeline/shared/components/login_button.dart';
 import 'package:lifeline/shared/components/password_text.dart';
 import 'package:lifeline/shared/components/select_gover.dart';
 import 'package:lifeline/shared/components/select_hospital_name.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/const_text_controllers.dart';
 import 'package:lifeline/shared/const_validation.dart';

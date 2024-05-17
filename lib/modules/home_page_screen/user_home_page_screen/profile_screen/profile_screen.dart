@@ -5,7 +5,7 @@ import 'package:lifeline/modules/home_page_screen/user_home_page_screen/profile_
 import 'package:lifeline/modules/login_screen/login_screen.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/shared/components/log_out.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
 

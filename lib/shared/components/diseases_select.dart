@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/constants.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lifeline/modules/login_screen/login_screen.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
 

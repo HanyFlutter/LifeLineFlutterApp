@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:lifeline/layout/home_screen/blood_bank_home_screen/blood_bank_home_screen.dart';
 import 'package:lifeline/layout/home_screen/hospital_home_screen/hospital_home_screen.dart';
 import 'package:lifeline/shared/components/toast_msg.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
@@ -241,7 +241,7 @@ Widget registerButton(BuildContext context){
   url: 'user/signIn', data: loginJsonToApi);
   userAndTokenFromApiLoginPost = response.data;
   print("from login screen  $userAndTokenFromApiLoginPost");
-  if (rememberMe == true) {
+
   await SharedPreferencesHelper.setString(
   key: 'email', value: emailAddressLogin.text);
   await SharedPreferencesHelper.setString(
@@ -254,7 +254,7 @@ Widget registerButton(BuildContext context){
   await SharedPreferencesHelper.setString(
   key: 'userToken',
   value: userAndTokenFromApiLoginPost!["token"]);
-  }
+
   try {
   response =
   await DioHelper.getData(url: 'user/profile', header: {

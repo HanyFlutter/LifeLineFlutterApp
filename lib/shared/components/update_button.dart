@@ -4,7 +4,7 @@ import 'package:lifeline/layout/home_screen/user_home_screen/user_home_screen.da
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/toast_msg.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/const_text_controllers.dart';
 import 'package:lifeline/shared/constants.dart';
@@ -43,7 +43,6 @@ class _UpdateButtonState extends State<UpdateButton> {
 
     };
     if (userFormKeyUpdate.currentState!.validate()) {
-      print('good to here $userToken     $userID');
 
       if(passwordUpdate.text.isNotEmpty){
        updateJsonToApi.addAll({"password":passwordUpdate!.text.toString()});
@@ -51,9 +50,8 @@ class _UpdateButtonState extends State<UpdateButton> {
     Response response;
     try {
 
-    SharedPreferencesHelper.getString(key: 'userID').then((value) => userID=value).catchError((e)=>print(e.toString()));
-    SharedPreferencesHelper.getString(key: 'userToken').then((value) async{
-      userToken=value;
+
+
       print('good to here $userToken     $userID');
 
       response =
@@ -71,8 +69,8 @@ class _UpdateButtonState extends State<UpdateButton> {
 
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => UserHomeScreen(updateResponse,title:constTitle,userAndTokenFromApiLoginPos:userAndTokenFromApiLoginPost!),
-      ));
-    }).catchError((e)=>                showToast(context)
+      )
+    ).catchError((e)=>                showToast(context)
     );
 
     } catch (e) {

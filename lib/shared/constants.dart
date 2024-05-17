@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifeline/layout/home_screen/blood_bank_home_screen/blood_bank_home_screen.dart';
 import 'package:lifeline/layout/home_screen/hospital_home_screen/hospital_home_screen.dart';
 import 'package:lifeline/layout/home_screen/user_home_screen/user_home_screen.dart';
-import 'package:lifeline/shared/const_hospital_deteals.dart';
+import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/modules/login_screen/login_screen.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
 import 'package:lifeline/shared/const_text_controllers.dart';
@@ -19,7 +19,7 @@ double screenHeight(context) => MediaQuery.of(context).size.height;
 global keys const
 */
 final formKeyUserRegister = GlobalKey<FormState>();
-final formKeyHospitalRegister=GlobalKey<FormState>();
+final formKeyHospitalRegister = GlobalKey<FormState>();
 final formKeyUpdate = GlobalKey<FormState>();
 final userFormKeyUpdate = GlobalKey<FormState>();
 
@@ -115,25 +115,25 @@ Map proccessOfRegistrationReasponse(Map object) {
 
   return object;
 }
-Map processHospitalRegistrationRespond(Map<String,dynamic> object){
 
-  goverCode=object["gov"];
+Map processHospitalRegistrationRespond(Map<String, dynamic> object) {
+  goverCode = object["gov"];
 
-  object["gov"]=hospitalsMap[object["gov"].toString()]?[0][0];
+  object["gov"] = hospitalsMap[object["gov"].toString()]?[0][0];
 
   hospitalsMap[goverCode.toString()]!.forEach((element) {
-    element[3]==cityCode?object["city"]=element[2]:'';
+    element[3] == cityCode ? object["city"] = element[2] : '';
   });
 
   print("from the function $object");
   return object;
 }
+
 Map proccessOfUpdateResponse(Map object) {
-  List cityList =  (hospitalsMap[object["gov"].toString()]!
-          .toList()
-          .firstWhere((element) => element[3] == (object["city"]))
-          .toList())
-      ;
+  List cityList = (hospitalsMap[object["gov"].toString()]!
+      .toList()
+      .firstWhere((element) => element[3] == (object["city"]))
+      .toList());
   object["city"] = cityList[2];
   object["gender"] = object["gender"] == "m" ? "ذكر" : "أنثي";
   List goverList = (goverListWithItsCode
@@ -154,5 +154,6 @@ Map? userAndTokenFromApiLoginPost = {};
 String selectedHospitalName = hospitalsMap["$goverCode"]![0][4];
 Map objectFromApiUpdatePost = {};
 Map updateResponse = {};
-Map objectFromHospitalRegistration={};
-String firstTimeDonation='''إذا كنت تتبرع بالدم لأول مرة، فقد ينتابك شعور بالتوتر والقلق، وهذا أمر شائع. تأكد من أن الإغماء قبل أو أثناء أو بعد التبرع بالدم أمر نادر الحدوث. موظفونا موهوبون في جعل التجربة سلسة قدر الإمكان. ربما من الأفضل ألا تشاهد الإبرة عند إدخالها، واحرص كذلك على عدم رؤية الدم.''';
+Map objectFromHospitalRegistration = {};
+String firstTimeDonation =
+    '''إذا كنت تتبرع بالدم لأول مرة، فقد ينتابك شعور بالتوتر والقلق، وهذا أمر شائع. تأكد من أن الإغماء قبل أو أثناء أو بعد التبرع بالدم أمر نادر الحدوث. موظفونا موهوبون في جعل التجربة سلسة قدر الإمكان. ربما من الأفضل ألا تشاهد الإبرة عند إدخالها، واحرص كذلك على عدم رؤية الدم.''';

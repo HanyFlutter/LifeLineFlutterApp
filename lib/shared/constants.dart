@@ -22,7 +22,7 @@ final formKeyUserRegister = GlobalKey<FormState>();
 final formKeyHospitalRegister = GlobalKey<FormState>();
 final formKeyUpdate = GlobalKey<FormState>();
 final userFormKeyUpdate = GlobalKey<FormState>();
-
+final createBloodDriveFormKey=GlobalKey<FormState>();
 final formKeyLogin = GlobalKey<FormState>();
 /////////////////////////////////////////////////////
 
@@ -175,3 +175,4 @@ List heros=[];
 
 bool isAllowed=true;
 List <dynamic> hospitalListFromApi=[];
+List bloodDrives=[];

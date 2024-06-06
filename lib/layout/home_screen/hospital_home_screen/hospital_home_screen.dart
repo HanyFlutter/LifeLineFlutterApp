@@ -51,7 +51,7 @@ selectedFontSize: 18,
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
-          BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp),label: 'الإستغاثات'),
+          BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp),label: 'الحملات'),
           BottomNavigationBarItem(icon: Icon(Icons.browser_updated),label: 'تحديث '),
           BottomNavigationBarItem(icon: Icon(Icons.home_work),label: 'صفحتك'),
 

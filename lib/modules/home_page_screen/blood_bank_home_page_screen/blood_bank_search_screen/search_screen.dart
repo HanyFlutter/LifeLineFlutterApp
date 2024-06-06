@@ -129,8 +129,8 @@ setState(() {
                  print('قائمة من مودل شيت $listOfDiseasesSelectedValue');
                },
                child: Text(
-                 'طلب  ',
-                 style: TextStyle(fontSize: 16),
+                 'طلب أكياس دم ',
+                 style: TextStyle(fontSize: 16,color: mainColor),
 
                )),
          ],));

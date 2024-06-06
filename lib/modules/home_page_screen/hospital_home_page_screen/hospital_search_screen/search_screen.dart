@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lifeline/modules/home_page_screen/blood_bank_home_page_screen/blood_bank_orders/selected_blood_type.dart';
+import 'package:lifeline/modules/home_page_screen/hospital_home_page_screen/hospital_search_screen/selected_blood_type_hospital.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
@@ -16,7 +18,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
   void initState(){
   super.initState();
   try{
-    DioHelper.getDataWithoutBody(url: 'hospital/lists', header: {
+    DioHelper.getDataWithoutBody(url: 'bloodBank/lists', header: {
       "authentication": userAndTokenFromApiLoginPost!["token"]
     },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){print ('from search ${val.data}');
    setState(() {
@@ -29,7 +31,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
 
   }
 }
-  Widget selectGover(){
+ /* Widget selectGover(){
     return Row(
       children: [
         Card(child:         Text(
@@ -68,7 +70,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
         )
       ],
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
           
             children: [
-              Text('قائمة المستشفيات وبنوك الدم',style: TextStyle(fontSize: 22,color: mainColor),),
+              Text('قائمة ببنوك الدم',style: TextStyle(fontSize: 22,color: mainColor),),
             ],
           ),
         ),
@@ -97,7 +99,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
 
            (ctx,index){
          return Card(child: Column(children: [
-           Text('اسم المستشفى ${hospitalListFromApi[index]['name']}',style: TextStyle(fontSize: 18,color: secondColor)),
+           Text('اسم بنك الدم ${hospitalListFromApi[index]['name']}',style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
            Text('العنوان ${hospitalListFromApi[index]['addressDescription']}',style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
@@ -105,6 +107,20 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
            SizedBox(height: 5,),
            Text('الهاتف  ${hospitalListFromApi[index]['phone']}' ,style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
+           ElevatedButton(
+               onPressed: () {
+                 setState(() async {
+                   print('from create order  ${hospitalListFromApi[index]}');
+
+                   bloodTypeOrder = await showModalBottomSheet(
+                       context: context, builder: (context) => SelectedBloodTypeHospital(bloodGroupList:  hospitalListFromApi[index],userAndToken:userAndTokenFromApiLoginPost));
+                 });
+               },
+               child: Text(
+                 'طلب أكياس دم ',
+                 style: TextStyle(fontSize: 16,color: mainColor),
+
+               )),
 
          ],));
        }))

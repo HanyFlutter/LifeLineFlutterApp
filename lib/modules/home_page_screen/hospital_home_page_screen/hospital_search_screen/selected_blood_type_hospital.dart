@@ -8,17 +8,16 @@ import 'package:lifeline/shared/constants.dart';
 import 'package:lifeline/styles/main_style.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 
-class SelectedBloodType extends StatefulWidget {
-  const SelectedBloodType({super.key,required  this.bloodGroupList,required this.userAndToken});
+class SelectedBloodTypeHospital extends StatefulWidget {
+  const SelectedBloodTypeHospital({super.key,required  this.bloodGroupList,required this.userAndToken});
 final bloodGroupList;
 final userAndToken;
   @override
-  State<SelectedBloodType> createState() => _SelectedBloodTypeState();
+  State<SelectedBloodTypeHospital> createState() => _SelectedBloodTypeHospitalState();
 }
 
-class _SelectedBloodTypeState extends State<SelectedBloodType> {
+class _SelectedBloodTypeHospitalState extends State<SelectedBloodTypeHospital> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  MultiSelectController _controller = MultiSelectController();
   @override
   Widget build(BuildContext context) {
     bloodGroup=widget.bloodGroupList['bloodGroup'];
@@ -92,6 +91,8 @@ class _SelectedBloodTypeState extends State<SelectedBloodType> {
                                 backgroundColor: MaterialStateProperty.all(
                                     Color.fromARGB(255, 179, 17, 17))),
                             onPressed: () {
+                              Navigator.pop(context, []);
+
                             },
                             child: Text(
                               'الغاء ',
@@ -107,19 +108,19 @@ class _SelectedBloodTypeState extends State<SelectedBloodType> {
                                 backgroundColor: MaterialStateProperty.all(
                                     Color.fromARGB(255, 2, 88, 5))),
                             onPressed: () async{
+                              print('bloodBank id is : ${widget.bloodGroupList['_id']}');
                               bloodGroup.forEach((a){a.remove('_id');});
                               print('after remove id $bloodGroup');
                               Response response;
     try {
-    response = await DioHelper.postData(
-    url: 'order/Add', data: {
+    response = await DioHelper.postData(url: 'order/Add', data: {
       "bloodGroup":bloodGroup,
-      "bloodBankID": userAndTokenFromApiLoginPost!["bloodBankID"],
-      "hospitalID": widget.bloodGroupList['_id'],
-      "from": "hospital",
-      "to": "bank"
+      "bloodBankID": widget.bloodGroupList["_id"],
+      "hospitalID": userAndTokenFromApiLoginPost!["hospitalID"],
+      "from": "bank",
+      "to": "hospital"
 
-    },header: {"authentication":userAndTokenFromApiLoginPost!["token"]},param: {"bloodBankID":userAndTokenFromApiLoginPost!["bloodBankID"]});
+    },header: {"authentication":userAndTokenFromApiLoginPost!["token"]},param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]});
 print(response.data);
     } catch (e) {
     showToast(context);

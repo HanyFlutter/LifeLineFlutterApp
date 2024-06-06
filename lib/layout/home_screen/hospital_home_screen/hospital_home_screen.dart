@@ -32,7 +32,7 @@ class _HospitalHomeScreenState extends State<HospitalHomeScreen> {
     cityCode=widget.cityCode;
     userAndTokenFromApiLoginPost=widget.userAndTokenFromApiLoginPos;
   }
-  int indexItem=3;
+  int indexItem=4;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -51,6 +51,8 @@ selectedFontSize: 18,
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'الطلبات'),
+
           BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp),label: 'الحملات'),
           BottomNavigationBarItem(icon: Icon(Icons.browser_updated),label: 'تحديث '),
           BottomNavigationBarItem(icon: Icon(Icons.home_work),label: 'صفحتك'),

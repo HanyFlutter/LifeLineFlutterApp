@@ -19,6 +19,9 @@ TextEditingController passwordRegistrationHospital = TextEditingController();
 TextEditingController rewritePasswordRegistrationHospital = TextEditingController();
 TextEditingController emailAddressRegistrationHospital = TextEditingController();
 
+TextEditingController bloodDriveDescription = TextEditingController();
+TextEditingController bloodDriveStart = TextEditingController();
+TextEditingController bloodDriveEnd = TextEditingController();
 
 TextEditingController phoneNumberUpdate = TextEditingController();
 TextEditingController passwordUpdate = TextEditingController();

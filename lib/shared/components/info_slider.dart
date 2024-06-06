@@ -27,7 +27,8 @@ final isIntro;
         ),
         skipTextButton: isIntro?Text('Skip'):Container(),
         trailing:  isIntro?Text('login'):Container(),
-        background: [ Image.asset('assets/blood_donation_info/ben0.png',width: screenWidth(context),height: (screenHeight(context)-220),),
+        background: [
+          Image.asset('assets/blood_donation_info/ben0.png',width: screenWidth(context),height: (screenHeight(context)-220),),
           Image.asset('assets/blood_donation_info/ben1.png',width: screenWidth(context),height: (screenHeight(context)-150),),
           Image.asset('assets/blood_donation_info/ben2.png',width: screenWidth(context),height: (screenHeight(context)-170),),
           Image.asset('assets/blood_donation_info/ben3.png',width: screenWidth(context),height: (screenHeight(context)-150),),

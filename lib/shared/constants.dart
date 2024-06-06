@@ -176,3 +176,6 @@ List heros=[];
 bool isAllowed=true;
 List <dynamic> hospitalListFromApi=[];
 List bloodDrives=[];
+List bloodTypeOrder=[];
+List bloodGroup=[];
+Map orderListFromApi={};

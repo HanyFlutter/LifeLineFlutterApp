@@ -5,30 +5,30 @@ import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
 import 'package:lifeline/styles/main_style.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class HospitalSearchScreen extends StatefulWidget {
+  const HospitalSearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<HospitalSearchScreen> createState() => _HospitalSearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  void initState() {
+class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
+  void initState(){
+  super.initState();
+  try{
+    DioHelper.getDataWithoutBody(url: 'hospital/lists', header: {
+      "authentication": userAndTokenFromApiLoginPost!["token"]
+    },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){print ('from search ${val.data}');
+   setState(() {
+     hospitalListFromApi=val.data;
+   });
+    ;});
+    print("from search screen  done to here");
 
-    super.initState();
-    try{
-      DioHelper.getDataWithoutBody(url: 'hospital/lists', header: {
-        "authentication": userToken
-      },param: {"userID":userID}).then((val){print ('from initState in search ${val.data}');
-      hospitalListFromApi=val.data;
-      ;});
-      print("from search screen  done to here");
-
-    }catch(e){
-
-    }
+  }catch(e){
 
   }
+}
   Widget selectGover(){
     return Row(
       children: [
@@ -105,26 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
            SizedBox(height: 5,),
            Text('الهاتف  ${hospitalListFromApi[index]['phone']}' ,style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
-           isAllowed? ElevatedButton(onPressed: (){
-             try{
-             String isHospital="";
-             isHospital=  hospitalListFromApi[index]['isOwner']=="hospital"?"hospitalID":"bloodBankID";
-               DioHelper.postData(url: 'donate/Add', header: {
-                 "authentication": userToken
-               },param: {"userID":userID},data: {   "donationDate":'${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}',isHospital:hospitalListFromApi[index]['_id']
-               }).then((val){print ('from initState in profile ${val.data}');
-               isAllowed= val.data=="allowed to donate"? true: false;
-               ;});
-               print("from profile screen  done to here");
 
-             }catch(e){
-
-             }
-
-
-           }, child: Text("تبرع",style: TextStyle(color: Colors.white,fontSize: 18),),  style: ButtonStyle(
-               backgroundColor:
-               MaterialStateProperty.all(Color.fromARGB(255, 2, 88, 5))),):Text('غير متاح التبرع',style: TextStyle(fontSize: 18),)
          ],));
        }))
        /* Expanded(

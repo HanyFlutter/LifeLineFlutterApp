@@ -76,7 +76,46 @@ class _HospitalRegistrationState extends State<HospitalRegistration > {
           SizedBox(
             height: 10,
           ),
-          SelectHospitalName(),
+         Row(
+    children: [
+    Text(
+    ' إسم المستشفى  ',
+        style: TextStyle(fontSize: 14),
+    ),
+    Center(
+    child: DropdownButton<String>(
+    value: selectedHospitalName, // Default value
+
+    onChanged: (String? newValue) {
+    setState(() {
+    selectedHospitalName = newValue!;
+    hospitalsMap["$goverCode"]!.forEach((element) {
+    element[4] == newValue
+    ? cityIndex = hospitalsMap["$goverCode"]!.indexOf(element)
+        : '';
+    });
+    cityCode = hospitalsMap["$goverCode"]![cityIndex][3];
+
+    });
+
+
+
+    // Handle dropdown item selection
+    print('Selected: $selectedCity');
+    },
+    items: hospitalsMap["$goverCode"]!.map((value) {
+    return DropdownMenuItem<String>(
+    value: value[4],
+    child: Text(
+    value[4],
+    style: TextStyle(fontSize: 14, color: Colors.blue),
+    ),
+    );
+    }).toList(),
+    ),
+    )
+    ],
+    ),
           SizedBox(
             height: 10,
           ),

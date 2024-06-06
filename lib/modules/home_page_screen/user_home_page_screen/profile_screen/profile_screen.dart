@@ -1,23 +1,45 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lifeline/modules/home_page_screen/user_home_page_screen/profile_screen/profile_update.dart';
 import 'package:lifeline/modules/login_screen/login_screen.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
+import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/log_out.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
+import 'package:lifeline/styles/main_style.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  @override
+
+  void initState() {
+
+    super.initState();
+    try{
+      DioHelper.getDataWithoutBody(url: 'donate/', header: {
+        "authentication": userToken
+      },param: {"userID":userID}).then((val){print ('from initState in profile ${val.data}');
+      isAllowed= val.data=="allowed to donate"? true: false;
+      ;});
+      print("from profile screen  done to here");
+
+    }catch(e){
+
+    }
+
+
+  }
+
+
+    @override
   Widget build(BuildContext context) {
     print('from profile gover code  ${goverCode}');
 
@@ -55,10 +77,24 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               const SizedBox(
                 height: 10,
               ),
+            isAllowed?  Card(
+                child: Text(
+                  "مسموح بالتبرع ",
+                  style: TextStyle(fontSize: 22,color: mainColor),
+                ),
+              ): Card(
+              child: Text(
+                "غير مسموح بالتبرع ",
+                style: TextStyle(fontSize: 22,color: mainColor),
+              ),
+            ),
+              const SizedBox(
+                height: 10,
+              ),
               Card(
                 child: Text(
                   "الإسم :  ${toControllers!["firstName"]}  ${toControllers!["lastName"]}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 22,color: mainColor),
                 ),
               ),
               SizedBox(
@@ -67,7 +103,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   "تاريخ الميلاد  :${toControllers!["birthDate"]}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -76,7 +112,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   " النوع : ${toControllers!["gender"]} ",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -85,7 +121,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   "${toControllers!["bloodType"]} فصيلة الدم : ",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -94,7 +130,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   "المحافظة  : ${toControllers!["gov"]}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -103,7 +139,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   "المدينة  :  ${toControllers!["city"]} ",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -112,7 +148,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   ' عدد مرات التبرع   :  ${toControllers!["donationTimes"]} ',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -121,7 +157,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   '  ${toControllers!["email"]} :البريد الإلكتروني ',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -130,7 +166,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
               Card(
                 child: Text(
                   "رقم الموبايل : ${toControllers!["phone"]}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20,color: secondColor),
                 ),
               ),
               SizedBox(
@@ -144,7 +180,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
                           children: [
                             Text(
                               ": الأمراض",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 20,color: mainColor),
                             ),
                             SizedBox(
                               height: 15,
@@ -160,7 +196,7 @@ Navigator.push(context, MaterialPageRoute(builder: (ctx){
                                       child: Center(
                                         child: Text(
                                           toControllers!["disease"][index],
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: 20,color: mainColor),
                                         ),
                                       ),
                                     );

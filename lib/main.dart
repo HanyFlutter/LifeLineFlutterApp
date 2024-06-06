@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        body: isFirstTimeOpenApp?IntroScreen():LoginScreen(),
+        body: isFirstTimeOpenApp?IntroScreen(isIntro: true,):LoginScreen(),
       ),
     );
   }

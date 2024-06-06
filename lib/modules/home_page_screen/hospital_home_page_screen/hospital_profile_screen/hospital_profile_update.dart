@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
 import 'package:lifeline/shared/components/blood_bank_update_button.dart';
 import 'package:lifeline/shared/components/hospital_update_button.dart';
@@ -20,7 +21,21 @@ class _HospitalProfileUpdateState extends State<HospitalProfileUpdate> {
       showPasswordRegistration = !showPasswordRegistration;
     });
   }
+  void initState() {
 
+    super.initState();
+    try{
+      DioHelper.postData(url: 'order/Add', header: {
+        "authentication": userAndTokenFromApiLoginPost!["token"]
+      },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){print ('from search ${val.data}');
+      ;});
+      print("from search screen  done to here");
+
+    }catch(e){
+
+    }
+
+  }
   bool changePassword = false;
   @override
   Widget build(BuildContext context) {

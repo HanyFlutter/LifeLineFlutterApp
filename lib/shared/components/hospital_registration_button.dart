@@ -39,7 +39,7 @@ class _HospitalRegistrationButtonState extends State<HospitalRegistrationButton>
                 "name": hospitalsMap["$goverCode"]![cityIndex][4],
                 "email": emailAddressRegistrationHospital.text,
                 "password": passwordRegistrationHospital.text,
-                "phone": "022580947",
+                "phone": hospitalsMap["$goverCode"]![cityIndex][6],
                 "gov": hospitalsMap["$goverCode"]![cityIndex][1],
                 "city": hospitalsMap["$goverCode"]![cityIndex][3],
                 "addressDescription": hospitalsMap["$goverCode"]![cityIndex][5],

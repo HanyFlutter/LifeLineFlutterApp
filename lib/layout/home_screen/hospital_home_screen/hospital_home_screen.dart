@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifeline/modules/home_page_screen/hospital_home_page_screen/hospital_list_of_screens.dart';
+import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/constants.dart';
@@ -22,8 +23,10 @@ class HospitalHomeScreen extends StatefulWidget {
 class _HospitalHomeScreenState extends State<HospitalHomeScreen> {
   @override
   void initState() {
+
     // TODO: implement initState
     super.initState();
+
     objectFromHospitalRegistration=widget.objectFromRegistration;
     goverCode=widget.goverCode;
     cityCode=widget.cityCode;

@@ -172,3 +172,6 @@ bool isFirstTimeOpenApp=true;
 String isOwner='';
 List receivedHistory=[];
 List heros=[];
+
+bool isAllowed=true;
+List <dynamic> hospitalListFromApi=[];

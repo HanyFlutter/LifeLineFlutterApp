@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifeline/modules/home_page_screen/user_home_page_screen/list_of_screens.dart';
 import 'package:lifeline/network/local/shared_preferences_helper.dart';
+import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
 import 'package:lifeline/shared/constants.dart';
 
@@ -15,9 +16,24 @@ final userAndTokenFromApiLoginPos;
 }
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    try {
+
+      DioHelper.getDataWithoutBody(url: 'user/Heros', header: {
+        "authentication": userToken,
+        "Content-Type":"application/json"
+      }
+      ).then((value){heros=value.data;
+      }).catchError((err){print(err.toString());})
+
+      ;}catch(e){print(e.toString());};
+  }
   _UserHomeScreenState();
 
-  int indexItem = 3;
+  int indexItem = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +50,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       body: screenList[indexItem],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
-        selectedFontSize: 18,
+        selectedFontSize: 16,
 
         type: BottomNavigationBarType.fixed,
         currentIndex: indexItem,
@@ -45,6 +61,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
+          BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: 'لمعلوماتك'),
+
           BottomNavigationBarItem(icon: Icon(Icons.wine_bar), label: 'الأبطال'),
           BottomNavigationBarItem(
               icon: Icon(Icons.minor_crash_sharp), label: 'الإستغاثات'),

@@ -36,6 +36,9 @@ List<PageViewModel> listPagesViewModel =[
 ];
 
 class IntroScreen extends StatefulWidget {
+  final isIntro;
+
+  const IntroScreen({super.key,required this.isIntro});
 @override
 State<IntroScreen> createState() => _IntroScreenState();
 }
@@ -49,39 +52,43 @@ String _status = 'انتظار ...';
 
 @override
 Widget build(BuildContext context) {
-return IntroductionScreen(
-// 2. Pass that key to the `IntroductionScreen` `key` param
-key: _introKey,
-pages: listPagesViewModel,
-showNextButton: true,
-showDoneButton: true,
-  showSkipButton: true,
-  done: Text('تسجيل الدخول',style: TextStyle(fontSize: 14,color: Colors.blue),),
-  next: Text('التالي',style: TextStyle(fontSize: 14,color: Colors.blue),),
-  skip: Text('<< تخطى',style: TextStyle(fontSize: 14,color: Colors.blue),),
-  dotsDecorator: DotsDecorator(
-  size: const Size.square(8.0),
-  activeSize: const Size(25.0, 8.0),
-  activeColor:Colors.red[700],
-  color: Colors.black26,
-  spacing: const EdgeInsets.symmetric(horizontal: 0.5),
-  activeShape: RoundedRectangleBorder(
-  borderRadius: BorderRadius.circular(25.0)
+return Directionality(
+  textDirection: TextDirection.rtl,
+  child: IntroductionScreen(
+  // 2. Pass that key to the `IntroductionScreen` `key` param
+  key: _introKey,
+  pages: listPagesViewModel,
+  showNextButton: widget.isIntro,
+  showDoneButton: widget.isIntro,
+    showSkipButton: widget.isIntro,
+    done: Text('تسجيل الدخول',style: TextStyle(fontSize: 14,color: Colors.blue),),
+    next: Text('التالي',style: TextStyle(fontSize: 14,color: Colors.blue),),
+    skip: Text('<< تخطى',style: TextStyle(fontSize: 14,color: Colors.blue),),
+    dotsDecorator: DotsDecorator(
 
- ),
-  ),
-  onDone: ()async{
-    SharedPreferencesHelper.setBool(key: 'isFirstTimeOpenApp',value: false).then((v)=>isFirstTimeOpenApp = v).catchError((a){print('from init state intro screen catch erro to set first time open bool $a');});
+    size: const Size.square(6.0),
+    activeSize: const Size(25.0, 8.0),
+    activeColor:Colors.red[700],
+    color: Colors.black26,
+    spacing: const EdgeInsets.symmetric(horizontal: 0.5),
+    activeShape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(25.0)
 
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>LoginScreen()));
+   ),
+    ),
+    onDone: ()async{
+      SharedPreferencesHelper.setBool(key: 'isFirstTimeOpenApp',value: false).then((v)=>isFirstTimeOpenApp = v).catchError((a){print('from init state intro screen catch erro to set first time open bool $a');});
 
-  },
-  onSkip: ()async{
-    SharedPreferencesHelper.setBool(key: 'isFirstTimeOpenApp',value: false).then((v)=>isFirstTimeOpenApp = v).catchError((a){print('from init state intro screen catch erro to set first time open bool $a');});
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>LoginScreen()));
 
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>LoginScreen()));
+    },
+    onSkip: ()async{
+      SharedPreferencesHelper.setBool(key: 'isFirstTimeOpenApp',value: false).then((v)=>isFirstTimeOpenApp = v).catchError((a){print('from init state intro screen catch erro to set first time open bool $a');});
 
-  },
-  );
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>LoginScreen()));
+
+    },
+    ),
+);
 }
 }

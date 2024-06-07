@@ -178,5 +178,4 @@ List <dynamic> hospitalListFromApi=[];
 List bloodDrives=[];
 List bloodTypeOrder=[];
 List bloodGroup=[];
-List orderListFromApi=[];
-List myOrderListFromApi=[];
+Map orderListFromApi={};

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
+import 'package:lifeline/shared/components/toast_msg.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
@@ -20,7 +21,10 @@ class _SearchScreenState extends State<SearchScreen> {
       DioHelper.getDataWithoutBody(url: 'hospital/lists', header: {
         "authentication": userToken
       },param: {"userID":userID}).then((val){print ('from initState in search ${val.data}');
-      hospitalListFromApi=val.data;
+setState(() {
+  hospitalListFromApi=val.data;
+
+});
       ;});
       print("from search screen  done to here");
 
@@ -116,8 +120,10 @@ class _SearchScreenState extends State<SearchScreen> {
                isAllowed= val.data=="allowed to donate"? true: false;
                ;});
                print("from profile screen  done to here");
+             showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
 
              }catch(e){
+               showToast(context);
 
              }
 

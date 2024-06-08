@@ -23,6 +23,9 @@ TextEditingController bloodDriveDescription = TextEditingController();
 TextEditingController bloodDriveStart = TextEditingController();
 TextEditingController bloodDriveEnd = TextEditingController();
 
+TextEditingController argentCallDescription = TextEditingController();
+TextEditingController argentCallStart = TextEditingController();
+
 TextEditingController phoneNumberUpdate = TextEditingController();
 TextEditingController passwordUpdate = TextEditingController();
 TextEditingController rewritePasswordUpdate = TextEditingController();

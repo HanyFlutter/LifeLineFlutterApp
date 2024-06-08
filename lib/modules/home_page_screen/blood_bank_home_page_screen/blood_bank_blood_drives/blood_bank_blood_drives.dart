@@ -82,16 +82,16 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-        SizedBox(height: 3,),
-        Card(
-          child: SingleChildScrollView(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+          SizedBox(height: 10,),
+          Card(
             child: Column(children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-
+            
                 children: [
                   Icon(Icons.minor_crash_sharp,color: Colors.orangeAccent,size: 25,),
                   Text('إنشاء حملة تبرع بالدمً',style: TextStyle(fontSize: 18,color: mainColor),),
@@ -103,7 +103,7 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-          
+                      
                         Container(
                             width: double.infinity,
                             child:TextFormField(
@@ -115,11 +115,11 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                             )
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         TextFormField(
                           controller: bloodDriveStart,
-          
+                      
                           validator: (String? val) {
                             if (val!.isEmpty) {
                               return 'خانة تاريخ بداية الحملة مطلوبة ';
@@ -135,10 +135,11 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           ),
                         ),
-          
+                        SizedBox(height: 10,),
+
                         TextFormField(
                           controller: bloodDriveEnd,
-          
+                      
                           validator: (String? val) {
                             if (val!.isEmpty) {
                               return 'خانة تاريخ نهاية الحملة مطلوبة ';
@@ -154,34 +155,31 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                             OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           ),
                         ),
-          
+                      
                         createBloodDriveButton(context),
-          
+                      
                       ]
-          
+                      
                   )),
-          
+                      
             ],),
           ),
-        ),
-
-
-
-          SizedBox(
-            height: 5,
-          ),
-
-          Text(
-            'الحملات المتاحة ',
-            style: TextStyle(fontSize: 20.0, color: mainColor),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(itemBuilder: (ctx,index){
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              'الحملات النشطة ',
+              style: TextStyle(fontSize: 20.0, color: mainColor),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (ctx,index){
               return Card(child: Column(children: [
-                Text('إسم بنك الدم:  ${bloodDrives[index]["bloodBank"]["name"]}', style: TextStyle(fontSize: 17.0, color: secondColor)),
+                Text('إسم بنك الدم:  ${bloodDrives[index]["bloodBank"]["name"]}', style: TextStyle(fontSize: 17.0, color: mainColor)),
                 SizedBox(
                   height: 5,
                 ),
@@ -198,7 +196,7 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                   height: 5,
                 ),
                 Text('هاتف بنك الدم :  ${bloodDrives[index]["bloodBank"]["phone"]}', style: TextStyle(fontSize: 17.0, color: secondColor)),
-
+            
                 SizedBox(
                   height: 5,
                 ),
@@ -206,12 +204,12 @@ class _BloodBankBloodDriveState extends State<BloodBankBloodDrive> {
                 SizedBox(
                   height: 5,
                 ),
-
+            
               ],),);
-            },itemCount: bloodDrives.length,),
-          )
-
-      ],),
+            },itemCount: bloodDrives.length,)
+        
+        ],),
+      ),
     );
   }
 }

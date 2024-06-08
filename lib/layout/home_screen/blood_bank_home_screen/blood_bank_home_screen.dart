@@ -29,7 +29,7 @@ class _BloodBankHomeScreenState extends State<BloodBankHomeScreen> {
 
     userAndTokenFromApiLoginPost=widget.userAndTokenFromApiLoginPos;
   }
-  int indexItem=4;
+  int indexItem=5;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -38,7 +38,7 @@ class _BloodBankHomeScreenState extends State<BloodBankHomeScreen> {
       body: bloodBankScreenList[indexItem],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
-        selectedFontSize: 18,
+        selectedFontSize: 14,
         type: BottomNavigationBarType.fixed,
         currentIndex: indexItem,
         onTap: (index){
@@ -49,8 +49,8 @@ class _BloodBankHomeScreenState extends State<BloodBankHomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
           BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'الطلبات'),
-
           BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp),label: 'الحملات'),
+          BottomNavigationBarItem(icon: Icon(Icons.ring_volume),label: 'الاستغاثات '),
           BottomNavigationBarItem(icon: Icon(Icons.browser_updated),label: 'تحديث '),
           BottomNavigationBarItem(icon: Icon(Icons.home_work),label: 'صفحتك'),
 

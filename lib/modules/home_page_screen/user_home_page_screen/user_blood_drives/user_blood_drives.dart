@@ -30,8 +30,9 @@ class _UserBloodDriveState extends State<UserBloodDrive> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(itemBuilder: (ctx,index){
-      return Card(child: Column(children: [    SizedBox(
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Card(child: Column(children: [    SizedBox(
         height: 5,
       ),
 
@@ -45,7 +46,7 @@ class _UserBloodDriveState extends State<UserBloodDrive> {
         Expanded(
           child: ListView.builder(itemBuilder: (ctx,index){
             return Card(child: Column(children: [
-              Text('إسم بنك الدم:  ${bloodDrives[index]["bloodBank"]["name"]}', style: TextStyle(fontSize: 17.0, color: secondColor)),
+              Text('إسم بنك الدم:  ${bloodDrives[index]["bloodBank"]["name"]}', style: TextStyle(fontSize: 17.0, color: mainColor)),
               SizedBox(
                 height: 5,
               ),
@@ -73,7 +74,6 @@ class _UserBloodDriveState extends State<UserBloodDrive> {
 
             ],),);
           },itemCount: bloodDrives.length,),
-        )],),);
-    },itemCount: bloodDrives.length,);
-  }
-}
+        )],),),
+    );
+}}

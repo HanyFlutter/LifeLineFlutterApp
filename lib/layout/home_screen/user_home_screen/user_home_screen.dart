@@ -33,7 +33,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   }
   _UserHomeScreenState();
 
-  int indexItem = 4;
+  int indexItem = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       body: screenList[indexItem],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
-        selectedFontSize: 16,
+        selectedFontSize: 14,
 
         type: BottomNavigationBarType.fixed,
         currentIndex: indexItem,
@@ -63,6 +63,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: 'لمعلوماتك'),
           BottomNavigationBarItem(icon: Icon(Icons.wine_bar), label: 'الأبطال'),
+          BottomNavigationBarItem(icon: Icon(Icons.ring_volume), label: 'الإستغاثات'),
+
           BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp), label: 'الحملات'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'صفحتك'),
         ],

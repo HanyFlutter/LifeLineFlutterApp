@@ -113,6 +113,8 @@ class _HospitalOrdersListState extends State<HospitalOrdersList> {
                               url: 'order/changeStatus', data: {
                             "status":"approved"
                           },header: {"authentication":userAndTokenFromApiLoginPost!["token"]},param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"],"orderID":orderListFromApi[index]["orderID"]});
+                          showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
+
                           print('from approved ${response.data}');
                         } catch (e) {
                           showToast(context);

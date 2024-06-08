@@ -108,6 +108,8 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
            Text('الهاتف  ${hospitalListFromApi[index]['phone']}' ,style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
            ElevatedButton(
+               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                   Color.fromARGB(255, 2, 88, 5))),
                onPressed: () {
                  setState(() async {
                    print('from create order  ${hospitalListFromApi[index]}');
@@ -118,7 +120,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
                },
                child: Text(
                  'طلب أكياس دم ',
-                 style: TextStyle(fontSize: 16,color: mainColor),
+                 style: TextStyle(fontSize: 16,color: Colors.white),
 
                )),
 

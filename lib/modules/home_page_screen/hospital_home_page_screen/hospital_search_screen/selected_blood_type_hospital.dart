@@ -27,7 +27,7 @@ class _SelectedBloodTypeHospitalState extends State<SelectedBloodTypeHospital> {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            height: 500,
+            height: 600,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -122,6 +122,8 @@ class _SelectedBloodTypeHospitalState extends State<SelectedBloodTypeHospital> {
 
     },header: {"authentication":userAndTokenFromApiLoginPost!["token"]},param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]});
 print(response.data);
+    showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
+
     } catch (e) {
     showToast(context);
     print('from catch :  ${e}');

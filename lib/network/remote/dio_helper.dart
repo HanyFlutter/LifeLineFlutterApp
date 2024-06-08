@@ -37,4 +37,9 @@ class DioHelper {
     return await dio.patch(url,
         data: jsonEncode(data), options: Options(headers: header),queryParameters: param);
   }
+  static Future<Response> deleteData(
+      {required String url, Object? data, Map<String, dynamic>? header,Map<String,dynamic>? param}) async {
+    return await dio.delete(url,
+        options: Options(headers: header),queryParameters: param);
+  }
 }

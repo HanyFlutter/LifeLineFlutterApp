@@ -3,6 +3,7 @@ import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
 import 'package:lifeline/shared/components/blood_bank_update_button.dart';
 import 'package:lifeline/shared/components/hospital_update_button.dart';
+import 'package:lifeline/shared/components/toast_msg.dart';
 import 'package:lifeline/shared/constants.dart';
 
 class HospitalProfileUpdate extends StatefulWidget {
@@ -27,7 +28,10 @@ class _HospitalProfileUpdateState extends State<HospitalProfileUpdate> {
     try{
       DioHelper.postData(url: 'order/Add', header: {
         "authentication": userAndTokenFromApiLoginPost!["token"]
-      },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){print ('from search ${val.data}');
+      },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){
+        showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
+
+        print ('from search ${val.data}');
       ;});
       print("from search screen  done to here");
 

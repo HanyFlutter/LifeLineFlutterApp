@@ -173,6 +173,18 @@ print("gover code is $goverCode");
            SizedBox(
              height: 10,
            ),
+         Row(children: [
+           Text('تم نقل دم لى'  ,style: TextStyle(fontSize: 16),),
+           Checkbox(value:isReceived , onChanged: ( val){
+             setState(() {
+               isReceived=val!;
+             });
+           }),
+
+         ],),
+           SizedBox(
+             height: 10,
+           ),
            Row(
              children: [
                Expanded(

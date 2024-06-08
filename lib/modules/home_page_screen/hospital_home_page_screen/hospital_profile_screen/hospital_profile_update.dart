@@ -3,6 +3,7 @@ import 'package:lifeline/network/remote/dio_helper.dart';
 import 'package:lifeline/shared/components/app_bar.dart';
 import 'package:lifeline/shared/components/blood_bank_update_button.dart';
 import 'package:lifeline/shared/components/hospital_update_button.dart';
+import 'package:lifeline/shared/components/toast_msg.dart';
 import 'package:lifeline/shared/constants.dart';
 
 class HospitalProfileUpdate extends StatefulWidget {
@@ -15,25 +16,23 @@ class HospitalProfileUpdate extends StatefulWidget {
 
 class _HospitalProfileUpdateState extends State<HospitalProfileUpdate> {
   @override
-  @override
   void toggelEye() {
     setState(() {
       showPasswordRegistration = !showPasswordRegistration;
     });
   }
+  @override
+
   void initState() {
 
     super.initState();
-    try{
-      DioHelper.postData(url: 'order/Add', header: {
-        "authentication": userAndTokenFromApiLoginPost!["token"]
-      },param: {"hospitalID":userAndTokenFromApiLoginPost!["hospitalID"]}).then((val){print ('from search ${val.data}');
-      ;});
-      print("from search screen  done to here");
 
-    }catch(e){
 
-    }
+  setState(() {
+    updatingBloodGroups["bloodGroup"].forEach((a){
+      a['count']=0;
+    });
+  });
 
   }
   bool changePassword = false;
@@ -99,6 +98,10 @@ class _HospitalProfileUpdateState extends State<HospitalProfileUpdate> {
                                                     "bloodGroup"]
                                                     [index]
                                                     ["count"]);
+                                                    updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]= updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]+1;
+
                                                   });
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.add),)),
@@ -129,11 +132,22 @@ class _HospitalProfileUpdateState extends State<HospitalProfileUpdate> {
                                                                     "bloodGroup"]
                                                                 [
                                                                 index]["count"] =
-                                                            objectFromHospitalRegistration[
+                                                    (  objectFromHospitalRegistration[
                                                                     "bloodGroup"]
                                                                 [
-                                                                index]["count"]-1
+                                                                index]["count"]-1 )
+
                                                         : 0;
+                                                    objectFromHospitalRegistration[
+                                                    "bloodGroup"]
+                                                    [index]
+                                                    ["count"] >0
+
+                                                        ? updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]=  updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]-1:0;
+
+
                                                   });
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.remove),)),

@@ -31,16 +31,16 @@ class _HospitalUpdateButtonState extends State<HospitalUpdateButton> {
               newItem.remove('_id');
               objectBloodGroupWithoutID.add(newItem);
             }
-            print('good to here $userAndTokenFromApiLoginPost!["token"]');
+            print('good to here $objectBloodGroupWithoutID');
 
             Response response;
             try {
               await DioHelper.updateData(url: 'hospital/${userAndTokenFromApiLoginPost!["hospitalID"]}', header: {
                 "authentication": userAndTokenFromApiLoginPost!["token"]
               }, data:{
-                "bloodGroup":objectBloodGroupWithoutID
+                "bloodGroup": updatingBloodGroups["bloodGroup"]
               }).then((value)  {
-
+print('updating object $updatingBloodGroups');
                 showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
 
               });

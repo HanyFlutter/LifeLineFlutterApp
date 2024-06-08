@@ -14,7 +14,12 @@ class HospitalHomeScreen extends StatefulWidget {
 
   final userAndTokenFromApiLoginPos;
 
-  const HospitalHomeScreen({super.key,required this.goverCode,required this.cityCode,required this.objectFromRegistration,required this.userAndTokenFromApiLoginPos});
+  const HospitalHomeScreen(
+      {super.key,
+      required this.goverCode,
+      required this.cityCode,
+      required this.objectFromRegistration,
+      required this.userAndTokenFromApiLoginPos});
 
   @override
   State<HospitalHomeScreen> createState() => _HospitalHomeScreenState();
@@ -23,41 +28,43 @@ class HospitalHomeScreen extends StatefulWidget {
 class _HospitalHomeScreenState extends State<HospitalHomeScreen> {
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
 
-    objectFromHospitalRegistration=widget.objectFromRegistration;
-    goverCode=widget.goverCode;
-    cityCode=widget.cityCode;
-    userAndTokenFromApiLoginPost=widget.userAndTokenFromApiLoginPos;
+    objectFromHospitalRegistration = widget.objectFromRegistration;
+    goverCode = widget.goverCode;
+    cityCode = widget.cityCode;
+    userAndTokenFromApiLoginPost = widget.userAndTokenFromApiLoginPos;
   }
-  int indexItem=4;
+
+  int indexItem = 5;
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: appBarWidget(title: 'مستشفى'),
-
       body: hospitalScreenList[indexItem],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
-selectedFontSize: 18,
+        selectedFontSize: 12,
         type: BottomNavigationBarType.fixed,
         currentIndex: indexItem,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-            indexItem=index;
+            indexItem = index;
           });
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'البحث'),
           BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'الطلبات'),
-
-          BottomNavigationBarItem(icon: Icon(Icons.minor_crash_sharp),label: 'الحملات'),
-          BottomNavigationBarItem(icon: Icon(Icons.browser_updated),label: 'تحديث '),
-          BottomNavigationBarItem(icon: Icon(Icons.home_work),label: 'صفحتك'),
-
-      ],),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.minor_crash_sharp), label: 'الحملات'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.ring_volume), label: 'إستغاثات'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.browser_updated), label: 'تحديث '),
+          BottomNavigationBarItem(icon: Icon(Icons.home_work), label: 'صفحتك'),
+        ],
+      ),
     );
   }
 }

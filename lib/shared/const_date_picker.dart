@@ -49,6 +49,17 @@ Future showDatePickerStart(BuildContext context) async {
     print(picked.toString().split(' ')[0]);
   }
 }
+Future showDatePickerStartArgent(BuildContext context) async {
+  final DateTime? picked = await selectDateBloodDrive(context);
+  if (picked != null) {
+    print('Selected date: $picked');
+    day = picked.day;
+    month = picked.month;
+    year = picked.year;
+    argentCallStart.text = picked.toString().split(' ')[0];
+    print(picked.toString().split(' ')[0]);
+  }
+}
 Future showDatePickerEnd(BuildContext context) async {
   final DateTime? picked = await selectDateBloodDrive(context);
   if (picked != null) {

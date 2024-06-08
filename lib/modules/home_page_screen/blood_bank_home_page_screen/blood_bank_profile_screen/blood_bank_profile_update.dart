@@ -19,7 +19,18 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
       showPasswordRegistration = !showPasswordRegistration;
     });
   }
+  void initState() {
 
+    super.initState();
+
+
+    setState(() {
+      updatingBloodGroups["bloodGroup"].forEach((a){
+        a['count']=0;
+      });
+    });
+
+  }
   bool changePassword = false;
   @override
   Widget build(BuildContext context) {
@@ -79,10 +90,9 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                                     objectFromHospitalRegistration["bloodGroup"][index]["count"] =
                                                         objectFromHospitalRegistration["bloodGroup"]
                                                             [index]["count"]+1;
-                                                    print(objectFromHospitalRegistration[
-                                                    "bloodGroup"]
-                                                    [index]
-                                                    ["count"]);
+
+                                                    updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]++;
                                                   });
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.add),)),
@@ -118,6 +128,16 @@ class _BloodBankProfileUpdateState extends State<BloodBankProfileUpdate> {
                                                                 [
                                                                 index]["count"]-1
                                                         : 0;
+                                                    objectFromHospitalRegistration[
+                                                    "bloodGroup"]
+                                                    [index]
+                                                    ["count"] >0
+
+                                                        ? updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]=  updatingBloodGroups["bloodGroup"]
+                                                    [index]["count"]-1:0;
+
+
                                                   });
                                                 },
                                                 icon: CircleAvatar(child: Icon(Icons.remove),)),

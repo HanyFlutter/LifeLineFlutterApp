@@ -18,7 +18,20 @@ class _HeroesScreenState extends State<HeroesScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    try {
 
+      DioHelper.getDataWithoutBody(url: 'user/Heros', header: {
+        "authentication": userToken,
+        "Content-Type":"application/json"
+      }
+      ).then((value){
+        setState(() {
+          heros=value.data;
+        });
+
+      }).catchError((err){print(err.toString());})
+
+      ;}catch(e){print(e.toString());};
 
           }
   @override
@@ -44,7 +57,7 @@ class _HeroesScreenState extends State<HeroesScreen> {
         Expanded(
           child: ListView.builder(itemBuilder: (ctx,index){
             return Card(
-              color: Colors.amber
+              color: Colors.blue
             ,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,15 +68,15 @@ class _HeroesScreenState extends State<HeroesScreen> {
                   children: [
                     Icon(Icons.wine_bar,color: Colors.yellowAccent,size: 30,),
 
-                    Text('اسم البطل ${heros[index]["fullName"]}',style: TextStyle(fontSize: 22,color: mainColor),),
+                    Text('اسم البطل ${heros[index]["fullName"]}',style: TextStyle(fontSize: 22,color: Colors.white),),
                   ],
                 ),
                   SizedBox(height: 5,),
-                  Text('الترتبيب ${heros[index]["rank"]}',style: TextStyle(fontSize: 18,color: secondColor),),
+                  Text('الترتبيب ${heros[index]["rank"]}',style: TextStyle(fontSize: 18,color:  Colors.yellowAccent),),
                   SizedBox(height: 5,),
-                  Text('الهاتف ${heros[index]["phone"]}',style: TextStyle(fontSize: 18,color: secondColor),),
+                  Text('الهاتف ${heros[index]["phone"]}',style: TextStyle(fontSize: 18,color:  Colors.yellowAccent),),
                   SizedBox(height: 5,),
-                  Text('عدد مرات التبرع ${heros[index]["donationTimes"]}',style: TextStyle(fontSize: 18,color: secondColor),),
+                  Text('عدد مرات التبرع ${heros[index]["donationTimes"]}',style: TextStyle(fontSize: 18,color: Colors.yellowAccent),),
                   SizedBox(height: 5,),
               ],),
             );

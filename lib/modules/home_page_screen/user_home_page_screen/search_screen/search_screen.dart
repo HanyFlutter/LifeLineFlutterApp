@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
+import 'package:lifeline/shared/components/toast_msg.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
@@ -20,55 +21,17 @@ class _SearchScreenState extends State<SearchScreen> {
       DioHelper.getDataWithoutBody(url: 'hospital/lists', header: {
         "authentication": userToken
       },param: {"userID":userID}).then((val){print ('from initState in search ${val.data}');
-      hospitalListFromApi=val.data;
+setState(() {
+  hospitalListFromApi=val.data;
+
+});
       ;});
       print("from search screen  done to here");
-
     }catch(e){
-
     }
 
   }
-  Widget selectGover(){
-    return Row(
-      children: [
-        Card(child:         Text(
-          ' إبحث عن مستشفيات في محافظة   ',
-          style: TextStyle(fontSize: 14),
-        ) ,),
-        Center(
-          child: DropdownButton<String>(
-            value: selectedGoverMenu, // Default value
-            onChanged: (String? newValue) {
-              setState(() {
 
-                cityIndex = 0;
-                selectedGoverMenu = newValue!;
-                goverListWithItsCode.forEach(
-                        (e) => e[1] == selectedGoverMenu ? goverCode = e[0] : 0);
-
-                selectedHospitalName = hospitalsMap[goverCode]![0][4];
-                selectedCity = hospitalsMap[goverCode]![0][2];
-
-                print('gover code is $goverCode');
-              });
-
-              // Handle dropdown item selection
-            },
-            items: goverListWithItsCode.map((value) {
-              return DropdownMenuItem<String>(
-                value: value[1],
-                child: Text(
-                  value[1],
-                  style: TextStyle(fontSize: 20, color: Colors.blue),
-                ),
-              );
-            }).toList(),
-          ),
-        )
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +79,10 @@ class _SearchScreenState extends State<SearchScreen> {
                isAllowed= val.data=="allowed to donate"? true: false;
                ;});
                print("from profile screen  done to here");
+             showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
 
              }catch(e){
+               showToast(context);
 
              }
 
@@ -127,36 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                MaterialStateProperty.all(Color.fromARGB(255, 2, 88, 5))),):Text('غير متاح التبرع',style: TextStyle(fontSize: 18),)
          ],));
        }))
-       /* Expanded(
-          child: ListView.builder(
-              itemCount: hospitalsMap["$goverCode"]!.length,
-              itemBuilder: (ctx,index){
-                return Card(child: Column(children: [
-                  Text('  إسم المدينة  ${hospitalsMap["$goverCode"]![index][2]}'
-                      ,style: TextStyle(fontSize: 18,color: mainColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text('  إسم المستشفى  ${hospitalsMap["$goverCode"]![index][4]}'
-                      ,style: TextStyle(fontSize: 18,color: secondColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text('  العنوان   ${hospitalsMap["$goverCode"]![index][5]}',
-                      style: TextStyle(fontSize: 18,color: secondColor)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    '  رقم الهاتف :  ${hospitalsMap["$goverCode"]![index][6]} '
-                      ,style: TextStyle(fontSize: 18,color: secondColor)),
 
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],),);
-              }),
-        ),*/
       ],)),))
     );
   }

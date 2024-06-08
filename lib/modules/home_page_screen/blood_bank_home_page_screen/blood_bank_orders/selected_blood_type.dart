@@ -28,7 +28,7 @@ class _SelectedBloodTypeState extends State<SelectedBloodType> {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            height: 500,
+            height: 530,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -92,6 +92,8 @@ class _SelectedBloodTypeState extends State<SelectedBloodType> {
                                 backgroundColor: MaterialStateProperty.all(
                                     Color.fromARGB(255, 179, 17, 17))),
                             onPressed: () {
+                              Navigator.pop(context, []);
+
                             },
                             child: Text(
                               'الغاء ',
@@ -122,7 +124,8 @@ class _SelectedBloodTypeState extends State<SelectedBloodType> {
     },header: {"authentication":userAndTokenFromApiLoginPost!["token"]},param: {"bloodBankID":userAndTokenFromApiLoginPost!["bloodBankID"]});
 print(response.data);
     } catch (e) {
-    showToast(context);
+                                  Navigator.pop(context, []);
+
     print('from catch :  ${e}');
     }
 

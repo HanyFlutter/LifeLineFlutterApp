@@ -112,7 +112,7 @@ setState(() {
 
            (ctx,index){
          return Card(child: Column(children: [
-           Text('اسم المستشفى ${hospitalListFromApi[index]['name']}',style: TextStyle(fontSize: 18,color: secondColor)),
+           Text('اسم المستشفى ${hospitalListFromApi[index]['name']}',style: TextStyle(fontSize: 18,color: mainColor)),
            SizedBox(height: 5,),
            Text('العنوان ${hospitalListFromApi[index]['addressDescription']}',style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
@@ -121,16 +121,18 @@ setState(() {
            Text('الهاتف  ${hospitalListFromApi[index]['phone']}' ,style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
            ElevatedButton(
+             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                 Color.fromARGB(255, 2, 88, 5))),
                onPressed: () {
                  setState(() async {
                    bloodTypeOrder = await showModalBottomSheet(
                        context: context, builder: (context) => SelectedBloodType(bloodGroupList:  hospitalListFromApi[index],userAndToken:userAndTokenFromApiLoginPost));
                  });
-                 print('قائمة من مودل شيت $listOfDiseasesSelectedValue');
+                 print('قائمة من مودل شيت $bloodTypeOrder');
                },
                child: Text(
                  'طلب أكياس دم ',
-                 style: TextStyle(fontSize: 16,color: mainColor),
+                 style: TextStyle(fontSize: 16,color: Colors.white),
 
                )),
          ],));

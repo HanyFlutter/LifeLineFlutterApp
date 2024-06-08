@@ -23,6 +23,8 @@ final formKeyHospitalRegister = GlobalKey<FormState>();
 final formKeyUpdate = GlobalKey<FormState>();
 final userFormKeyUpdate = GlobalKey<FormState>();
 final createBloodDriveFormKey=GlobalKey<FormState>();
+final createArgentCallFormKey=GlobalKey<FormState>();
+
 final formKeyLogin = GlobalKey<FormState>();
 /////////////////////////////////////////////////////
 
@@ -177,5 +179,46 @@ bool isAllowed=true;
 List <dynamic> hospitalListFromApi=[];
 List bloodDrives=[];
 List bloodTypeOrder=[];
-List bloodGroup=[];
-Map orderListFromApi={};
+List bloodGroup=[
+  {  "bloodType": "A+",
+    "count": 0},
+  {  "bloodType": "A-",
+    "count": 0},
+  {  "bloodType": "B+",
+    "count": 0},
+  {  "bloodType": "B-",
+    "count": 0},
+  {  "bloodType": "AB+",
+    "count": 0},
+  {  "bloodType": "AB-",
+    "count": 0},
+  {  "bloodType": "O+",
+    "count": 0},
+  {  "bloodType": "O-",
+    "count": 0},
+];
+
+Map updatingBloodGroups={
+"bloodGroup":[
+{  "bloodType": "A+",
+"count": 0},
+{  "bloodType": "A-",
+"count": 0},
+{  "bloodType": "B+",
+"count": 0},
+{  "bloodType": "B-",
+"count": 0},
+{  "bloodType": "AB+",
+"count": 0},
+{  "bloodType": "AB-",
+"count": 0},
+{  "bloodType": "O+",
+"count": 0},
+{  "bloodType": "O-",
+"count": 0},]
+};
+
+List orderListFromApi=[];
+List argentCall=[];
+bool isReceived=false;
+

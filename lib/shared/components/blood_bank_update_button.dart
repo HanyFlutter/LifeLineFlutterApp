@@ -38,7 +38,7 @@ class _BloodBankUpdateButtonState extends State<BloodBankUpdateButton> {
                 await DioHelper.updateData(url: 'bloodBank/${userAndTokenFromApiLoginPost!["bloodBankID"]}', header: {
                   "authentication": userAndTokenFromApiLoginPost!["token"]
                 }, data:{
-                  "bloodGroup":objectBloodGroupWithoutID
+                  "bloodGroup": updatingBloodGroups["bloodGroup"]
                 }).then((value)  {
                   showToast(context,msg: "تم تحديث البيانات",color: Colors.green);
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifeline/modules/home_page_screen/blood_bank_home_page_screen/blood_bank_orders/selected_blood_type.dart';
 import 'package:lifeline/modules/home_page_screen/hospital_home_page_screen/hospital_search_screen/selected_blood_type_hospital.dart';
 import 'package:lifeline/network/remote/dio_helper.dart';
+import 'package:lifeline/shared/components/toast_msg.dart';
 import 'package:lifeline/shared/const_hospital_details.dart';
 import 'package:lifeline/shared/const_of_selected_lists_and_items.dart';
 import 'package:lifeline/shared/constants.dart';
@@ -108,17 +109,25 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
            Text('الهاتف  ${hospitalListFromApi[index]['phone']}' ,style: TextStyle(fontSize: 18,color: secondColor)),
            SizedBox(height: 5,),
            ElevatedButton(
+               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                   Color.fromARGB(255, 2, 88, 5))),
                onPressed: () {
-                 setState(() async {
+                 setState(()  {
                    print('from create order  ${hospitalListFromApi[index]}');
 
-                   bloodTypeOrder = await showModalBottomSheet(
-                       context: context, builder: (context) => SelectedBloodTypeHospital(bloodGroupList:  hospitalListFromApi[index],userAndToken:userAndTokenFromApiLoginPost));
+                try{    showModalBottomSheet(
+                       context: context, builder: (context) => SelectedBloodTypeHospital(bloodGroupList:  hospitalListFromApi[index],userAndToken:userAndTokenFromApiLoginPost)).then((value){
+                   bloodTypeOrder=value;
+                   });}  catch (e) {
+                   showToast(context);
+                   print('from catch :  ${e}');
+                   }
+
                  });
                },
                child: Text(
                  'طلب أكياس دم ',
-                 style: TextStyle(fontSize: 16,color: mainColor),
+                 style: TextStyle(fontSize: 16,color: Colors.white),
 
                )),
 
